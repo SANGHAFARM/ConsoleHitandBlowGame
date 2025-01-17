@@ -11,8 +11,14 @@ public:
 	DrawableActor(const char* image = " ");
 	virtual ~DrawableActor();
 
-	virtual void Draw() override;
+	virtual void Draw() override;	
 	virtual void SetPosition(const Vector2& newPosition) override;
+
+	// 액터의 테두리를 그리는 함수
+	void DrawOutline();
+
+	// 액터의 색상을 설정하는 함수
+	void SetActorColor(Color color);
 
 	// 충돌 확인 함수
 	bool Intersect(const DrawableActor& other);

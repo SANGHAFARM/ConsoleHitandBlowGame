@@ -47,6 +47,65 @@ void DrawableActor::SetPosition(const Vector2& newPosition)
 	Super::SetPosition(newPosition);
 }
 
+void DrawableActor::DrawOutline()
+{
+	// 최소한 정사각형을 만들기 위해 width가 3보다 작을 경우 
+	// 현재 문자 위치 기준에서 x - 2부터 x + 2 좌표까지 그리도록 고정
+	if (width < 3)
+	{
+		Engine::Get().SetCursorPosition(position.x - 2, position.y - 1);
+		Log("┌");
+		Engine::Get().SetCursorPosition(position.x + 2, position.y - 1);
+		Log("┐");
+		Engine::Get().SetCursorPosition(position.x - 2, position.y + 1);
+		Log("└");
+		Engine::Get().SetCursorPosition(position.x + 2, position.y + 1);
+		Log("┘");
+
+		Engine::Get().SetCursorPosition(position.x + 2, position.y);
+		Log("│");
+		Engine::Get().SetCursorPosition(position.x - 2, position.y);
+		Log("│");
+
+		for (int i = 0; i < 3; i++)
+		{
+			Engine::Get().SetCursorPosition(position.x + i - 1, position.y + 1);
+			Log("─");
+			Engine::Get().SetCursorPosition(position.x + i - 1, position.y - 1);
+			Log("─");
+		}
+	}
+	else
+	{
+		Engine::Get().SetCursorPosition(position.x - 1, position.y - 1);
+		Log("┌");
+		Engine::Get().SetCursorPosition(position.x + width, position.y - 1);
+		Log("┐");
+		Engine::Get().SetCursorPosition(position.x - 1, position.y + 1);
+		Log("└");
+		Engine::Get().SetCursorPosition(position.x + width, position.y + 1);
+		Log("┘");
+
+		Engine::Get().SetCursorPosition(position.x + width, position.y);
+		Log("│");
+		Engine::Get().SetCursorPosition(position.x - 1, position.y);
+		Log("│");
+
+		for (int i = 0; i < width; i++)
+		{
+			Engine::Get().SetCursorPosition(position.x + i, position.y + 1);
+			Log("─");
+			Engine::Get().SetCursorPosition(position.x + i, position.y - 1);
+			Log("─");
+		}
+	}
+}
+
+void DrawableActor::SetActorColor(Color color)
+{
+	this->color = color;
+}
+
 bool DrawableActor::Intersect(const DrawableActor& other)
 {
 	// AABB (Axis Aligned Bounding Box)

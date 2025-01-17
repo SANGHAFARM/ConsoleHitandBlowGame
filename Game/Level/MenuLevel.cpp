@@ -45,7 +45,7 @@ void MenuLevel::Draw()
 	Engine::Get().SetCursorPosition(0, 0);
 	
 	SetColor(unselectedColor);
-	Log("Sokoban Game\n\n");
+	Log("Hit and Blow Game\n\n");
 
 	for (int ix = 0; ix < length; ++ix)
 	{
